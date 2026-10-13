@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+:root {
+  --brand: #7a4e28;        /* cokelat utama (tombol, tab aktif) */
+  --brand-dark: #3f2a16;   /* cokelat gelap (bar keranjang, pill meja) */
+  --brand-soft: #f3e7d7;   /* krem lembut (search, highlight) */
+  --cream: #faf5ee;        /* background halaman */
+}
+
+body {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
