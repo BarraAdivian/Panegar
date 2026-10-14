@@ -101,3 +101,18 @@ export const HeadsetIcon = (props) => (
     <path d="M19 17v1a3 3 0 0 1-3 3h-4" />
   </svg>
 );
+
+export const WifiIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M12 20h.01" />
+    <path d="M2 8.82a15 15 0 0 1 20 0" />
+    <path d="M5 12.859a10 10 0 0 1 14 0" />
+    <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+  </svg>
+);
+
+export const ChatIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </svg>
+);

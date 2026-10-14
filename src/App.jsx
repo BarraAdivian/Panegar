@@ -4,7 +4,7 @@ import AllMenuPage from "./pages/AllMenuPage";
 import CartPage from "./pages/CartPage";
 import OrderStatusPage from "./pages/OrderStatusPage";
 import MenuDetailPage from "./pages/MenuDetailPage";
-import BottomNav from "./components/BottomNav";
+import HelpPage from "./pages/HelpPage";
 import {
   allMenus, getDefaultChoices, getUnitPrice, getOptionLabels,
 } from "./data/menu";
@@ -89,27 +89,27 @@ export default function App() {
   const removeItem = (key) => setCart((prev) => prev.filter((item) => item.key !== key));
 
   // 🧾 Buat order dari isi keranjang
-const createOrder = ({ items, note, payment }) => {
-  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
-  const tax = Math.round(subtotal * TAX_RATE);
-  const service = Math.round(subtotal * SERVICE_RATE);
-  const total = Math.max(subtotal + tax + service - DISCOUNT, 0);
+  const createOrder = ({ items, note, payment }) => {
+    const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+    const tax = Math.round(subtotal * TAX_RATE);
+    const service = Math.round(subtotal * SERVICE_RATE);
+    const total = Math.max(subtotal + tax + service - DISCOUNT, 0);
 
-  // Perkiraan siap: sekarang + 15 s/d 20 menit
-  const fmt = (d) =>
-    `${String(d.getHours()).padStart(2, "0")}.${String(d.getMinutes()).padStart(2, "0")}`;
-  const now = new Date();
-  const est = `${fmt(new Date(now.getTime() + 15 * 60000))} – ${fmt(new Date(now.getTime() + 20 * 60000))}`;
+    // Perkiraan siap: sekarang + 15 s/d 20 menit
+    const fmt = (d) =>
+      `${String(d.getHours()).padStart(2, "0")}.${String(d.getMinutes()).padStart(2, "0")}`;
+    const now = new Date();
+    const est = `${fmt(new Date(now.getTime() + 15 * 60000))} – ${fmt(new Date(now.getTime() + 20 * 60000))}`;
 
-  setOrder({
-    code: `PN-${Math.floor(1000 + Math.random() * 9000)}`,  // ← ganti KP jadi PN sesuai desain
-    time: fmt(now) + " WIB",
-    est,
-    items, note, payment, subtotal, tax, service, discount: DISCOUNT, total, status: 0,
-  });
-  setCart([]);
-  setView("pesanan");
-};
+    setOrder({
+      code: `PN-${Math.floor(1000 + Math.random() * 9000)}`,
+      time: fmt(now) + " WIB",
+      est,
+      items, note, payment, subtotal, tax, service, discount: DISCOUNT, total, status: 0,
+    });
+    setCart([]);
+    setView("pesanan");
+  };
 
   const advanceOrder = () =>
     setOrder((o) => (o ? { ...o, status: Math.min(o.status + 1, 3) } : o));
@@ -177,18 +177,11 @@ const createOrder = ({ items, note, payment }) => {
 
   if (view === "bantuan") {
     return (
-      <div className="min-h-screen bg-[var(--cream)]">
-        <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center gap-2 px-8 text-center">
-          <span className="text-5xl">🎧</span>
-          <p className="font-extrabold text-[#3f2a16]">Butuh Bantuan?</p>
-          <p className="text-sm text-[#8a7460]">
-            Panggil pelayan lewat halaman pesanan, atau hubungi kasir ya!
-          </p>
-        </div>
-        <div className="mx-auto max-w-md">
-          <BottomNav active="bantuan" onChange={setView} />
-        </div>
-      </div>
+      <HelpPage
+        tableNumber={tableNumber}
+        navActive="bantuan"
+        onNavChange={setView}
+      />
     );
   }
 
