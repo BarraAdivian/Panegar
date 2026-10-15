@@ -3,6 +3,7 @@ import MenuPage from "./pages/MenuPage";
 import AllMenuPage from "./pages/AllMenuPage";
 import CartPage from "./pages/CartPage";
 import OrderStatusPage from "./pages/OrderStatusPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 import MenuDetailPage from "./pages/MenuDetailPage";
 import HelpPage from "./pages/HelpPage";
 import {
@@ -12,45 +13,24 @@ import {
 const TAX_RATE = 0.1;      // Pajak PB1 10%
 const SERVICE_RATE = 0.05; // Biaya layanan 5%
 
-export default function App() {
-  // Nanti pas QR: ?meja=04
+export default function CustomerApp() {
   const tableNumber = new URLSearchParams(window.location.search).get("meja") ?? "04";
 
-  const [view, setView] = useState("menu"); // menu | allmenu | detail | cart | pesanan | bantuan
+  const [view, setView] = useState("menu"); // menu | allmenu | detail | cart | sukses | pesanan | bantuan
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [detailFrom, setDetailFrom] = useState("menu");
 
-  // State halaman Lihat Semua biar gak reset pas back dari detail
   const [allMenuSearch, setAllMenuSearch] = useState("");
   const [allMenuCategory, setAllMenuCategory] = useState("Semua");
 
-  // Keranjang awal (contoh biar bar-nya kelihatan — hapus isi arraynya kalau mau mulai kosong)
-  const [cart, setCart] = useState(() => {
-    const sate = allMenus.find((m) => m.id === 2);
-    const teh = allMenus.find((m) => m.id === 4);
-    return [
-      {
-        key: "2|tidak-tanpa", id: 2, name: sate.name, image: sate.image,
-        price: sate.price, qty: 1, note: "",
-        options: ["Tidak pedas", "Tanpa tambahan"],
-      },
-      {
-        key: "4|normal-regular", id: 4, name: teh.name, image: teh.image,
-        price: teh.price, qty: 1, note: "",
-        options: ["Manis (Default)", "Regular"],
-      },
-    ];
-  });
-
+  const [cart, setCart] = useState([]);
   const [payment, setPayment] = useState("kasir");
   const [order, setOrder] = useState(null);
 
-  // 📍 Scroll ke atas setiap pindah halaman
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [view]);
 
-  // 🛒 Masukkan item ke keranjang
   const pushItem = (menu, choices, qty, itemNote) => {
     const labels = getOptionLabels(menu, choices);
     const key = `${menu.id}|${Object.keys(choices).sort().map((k) => choices[k]).join("-")}`;
@@ -87,7 +67,7 @@ export default function App() {
 
   const removeItem = (key) => setCart((prev) => prev.filter((item) => item.key !== key));
 
-  // 🧾 Buat order dari isi keranjang
+  // 🧾 Buat order dari isi keranjang (simulasi lokal, tanpa database)
   const createOrder = ({ items, note, payment }) => {
     const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
     const tax = Math.round(subtotal * TAX_RATE);
@@ -107,13 +87,21 @@ export default function App() {
       items, note, payment, subtotal, tax, service, total, status: 0,
     });
     setCart([]);
-    setView("pesanan");
+    setView("sukses"); // ← lewat halaman sukses dulu
   };
 
-  const advanceOrder = () =>
-    setOrder((o) => (o ? { ...o, status: Math.min(o.status + 1, 3) } : o));
-
   // ===== Routing =====
+
+  if (view === "sukses" && order) {
+    return (
+      <OrderSuccessPage
+        tableNumber={tableNumber}
+        onBack={() => setView("menu")}
+        onSeeStatus={() => setView("pesanan")}
+        onNavChange={setView}
+      />
+    );
+  }
 
   if (view === "detail" && selectedMenu) {
     return (
@@ -166,7 +154,6 @@ export default function App() {
       <OrderStatusPage
         order={order}
         tableNumber={tableNumber}
-        onAdvance={advanceOrder}
         onAddMore={() => setView("menu")}
         onGoToMenu={() => setView("menu")}
         onNavChange={setView}
