@@ -1,5 +1,3 @@
-import { useState } from "react";
-import HomeHeader from "../components/HomeHeader";
 import SearchBar from "../components/SearchBar";
 import CategoryTabs from "../components/CategoryTabs";
 import MenuGrid from "../components/MenuGrid";
@@ -11,10 +9,8 @@ import { allMenus } from "../data/menu";
 export default function AllMenuPage({
   tableNumber, cart, addToCart, onOpenDetail,
   onBack, onOpenCart, navActive, onNavChange,
+  search, setSearch, category, setCategory,
 }) {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("Semua");
-
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
   const cartTotal = cart.reduce((s, i) => s + i.qty * i.price, 0);
 
@@ -26,17 +22,15 @@ export default function AllMenuPage({
 
   return (
     <div className="min-h-screen bg-[var(--cream)]">
-      <div className="mx-auto min-h-screen max-w-md pb-44">
-        <div className="flex items-center justify-between px-4 pt-4">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onBack}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#eadfcd] bg-white text-[#3f2a16] transition active:scale-90"
-            >
-              <ArrowLeftIcon className="h-5 w-5" />
-            </button>
-            <span className="text-[20px] font-bold text-[#3f2a16]">Kembali</span>
-          </div>
+      <div className="mx-auto min-h-screen max-w-md pb-44 md:max-w-none">
+        <div className="flex items-center justify-between px-4 pt-4 md:px-6">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-2 rounded-full border border-[#eadfcd] bg-white py-2 pl-3 pr-4 text-[#3f2a16] transition active:scale-95"
+          >
+            <ArrowLeftIcon className="h-4 w-4" />
+            <span className="text-sm font-bold">Kembali</span>
+          </button>
 
           <span className="rounded-full bg-[var(--brand-dark)] px-3.5 py-1.5 text-[11px] font-bold text-white">
             Meja {tableNumber}

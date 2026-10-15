@@ -1,7 +1,7 @@
 import { ArrowLeftIcon, ClockIcon } from "../components/Icons";
 import { rupiah } from "../utils/format";
 
-const TAX_RATE = 0.1;    // Pajak PB1 10%
+const TAX_RATE = 0.1;      // Pajak PB1 10%
 const SERVICE_RATE = 0.05; // Biaya layanan 5%
 
 const paymentMethods = [
@@ -24,7 +24,7 @@ export default function CartPage({
   if (cart.length === 0) {
     return (
       <div className="min-h-screen bg-[var(--cream)]">
-        <div className="mx-auto min-h-screen max-w-md bg-[var(--cream)]">
+        <div className="mx-auto min-h-screen max-w-md md:max-w-none">
           <Header tableNumber={tableNumber} onBack={onBack} />
           <div className="flex h-[70vh] flex-col items-center justify-center gap-2 text-center">
             <span className="text-5xl">🛒</span>
@@ -44,11 +44,11 @@ export default function CartPage({
 
   return (
     <div className="min-h-screen bg-[var(--cream)]">
-      <div className="mx-auto min-h-screen max-w-md pb-36">
+      <div className="mx-auto min-h-screen max-w-md pb-36 md:max-w-none">
         <Header tableNumber={tableNumber} onBack={onBack} />
 
         {/* Judul + tambah menu */}
-        <section className="mt-4 flex items-center justify-between px-4">
+        <section className="mt-4 flex items-center justify-between px-4 md:px-6">
           <h2 className="text-base font-extrabold text-[#3f2a16]">
             {itemCount} menu dipesan
           </h2>
@@ -61,7 +61,7 @@ export default function CartPage({
         </section>
 
         {/* Daftar item — satu kartu putih */}
-        <section className="mt-3 px-4">
+        <section className="mt-3 px-4 md:px-6">
           <div className="rounded-3xl bg-white p-4 shadow-sm">
             {cart.map((item, idx) => (
               <div
@@ -109,7 +109,7 @@ export default function CartPage({
         </section>
 
         {/* Cara bayar */}
-        <section className="mt-6 px-4">
+        <section className="mt-6 px-4 md:px-6">
           <h3 className="text-base font-extrabold text-[#3f2a16]">Cara bayar</h3>
           <div className="mt-3 space-y-3">
             {paymentMethods.map((m) => {
@@ -129,7 +129,6 @@ export default function CartPage({
                     <span className="block text-sm font-bold text-[#3f2a16]">{m.title}</span>
                     <span className="block text-[11px] text-[#a08a70]">{m.desc}</span>
                   </span>
-                  {/* Radio bulat */}
                   <span
                     className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition ${
                       active ? "border-[var(--brand)] bg-[var(--brand)]" : "border-[#d5c5ab]"
@@ -144,7 +143,7 @@ export default function CartPage({
         </section>
 
         {/* Rincian pembayaran */}
-        <section className="mt-6 px-4">
+        <section className="mt-6 px-4 md:px-6">
           <div className="rounded-3xl bg-white p-4 shadow-sm">
             <div className="flex justify-between text-sm">
               <span className="text-[#8a7460]">Subtotal</span>
@@ -166,7 +165,7 @@ export default function CartPage({
         </section>
 
         {/* Estimasi */}
-        <div className="mt-4 flex items-center gap-2 px-4 text-xs text-[#8a7460]">
+        <div className="mt-4 flex items-center gap-2 px-4 text-xs text-[#8a7460] md:px-6">
           <ClockIcon className="h-4 w-4" />
           <span>Pesanan siap sekitar 15–20 menit</span>
         </div>
@@ -174,7 +173,7 @@ export default function CartPage({
 
       {/* Tombol kirim (fixed) */}
       <div className="fixed inset-x-0 bottom-0 z-50 bg-gradient-to-t from-[var(--cream)] via-[var(--cream)] to-transparent pt-6">
-        <div className="mx-auto max-w-md p-4">
+        <div className="mx-auto max-w-md p-4 md:max-w-2xl">
           <button
             onClick={() => onConfirm({ items: cart, note: "", payment })}
             className="w-full rounded-full bg-[var(--brand)] py-4 text-sm font-bold text-white shadow-lg shadow-black/15 transition active:scale-[0.98]"
@@ -192,7 +191,7 @@ export default function CartPage({
 
 function Header({ tableNumber, onBack }) {
   return (
-    <header className="flex items-center justify-between px-4 pt-4">
+    <header className="flex items-center justify-between px-4 pt-4 md:px-6">
       <button
         onClick={onBack}
         className="flex h-9 w-9 items-center justify-center rounded-full border border-[#eadfcd] bg-white text-[#3f2a16] transition active:scale-90"

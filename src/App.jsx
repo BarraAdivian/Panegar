@@ -11,7 +11,6 @@ import {
 
 const TAX_RATE = 0.1;      // Pajak PB1 10%
 const SERVICE_RATE = 0.05; // Biaya layanan 5%
-const DISCOUNT = 0;        // Promo (0 = tidak ada)
 
 export default function App() {
   // Nanti pas QR: ?meja=04
@@ -19,13 +18,13 @@ export default function App() {
 
   const [view, setView] = useState("menu"); // menu | allmenu | detail | cart | pesanan | bantuan
   const [selectedMenu, setSelectedMenu] = useState(null);
-  const [detailFrom, setDetailFrom] = useState("menu"); // asal buka detail (menu / allmenu)
+  const [detailFrom, setDetailFrom] = useState("menu");
 
-  // State halaman Lihat Semua diangkat ke sini biar gak reset pas back dari detail
+  // State halaman Lihat Semua biar gak reset pas back dari detail
   const [allMenuSearch, setAllMenuSearch] = useState("");
   const [allMenuCategory, setAllMenuCategory] = useState("Semua");
 
-  // Keranjang awal (contoh biar bar-nya kelihatan — hapus aja kalau mau mulai kosong)
+  // Keranjang awal (contoh biar bar-nya kelihatan — hapus isi arraynya kalau mau mulai kosong)
   const [cart, setCart] = useState(() => {
     const sate = allMenus.find((m) => m.id === 2);
     const teh = allMenus.find((m) => m.id === 4);
@@ -33,7 +32,7 @@ export default function App() {
       {
         key: "2|tidak-tanpa", id: 2, name: sate.name, image: sate.image,
         price: sate.price, qty: 1, note: "",
-        options: ["Tidak Pedas", "Tanpa Tambahan"],
+        options: ["Tidak pedas", "Tanpa tambahan"],
       },
       {
         key: "4|normal-regular", id: 4, name: teh.name, image: teh.image,
@@ -51,7 +50,7 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [view]);
 
-  // 🛒 Masukkan item ke keranjang (dipakai quick-add & halaman detail)
+  // 🛒 Masukkan item ke keranjang
   const pushItem = (menu, choices, qty, itemNote) => {
     const labels = getOptionLabels(menu, choices);
     const key = `${menu.id}|${Object.keys(choices).sort().map((k) => choices[k]).join("-")}`;
@@ -70,11 +69,11 @@ export default function App() {
 
   const addFromDetail = ({ menu, choices, qty, note }) => {
     pushItem(menu, choices, qty, note);
-    setView(detailFrom); // balik ke asal (home atau lihat semua)
+    setView(detailFrom);
   };
 
   const openDetail = (menu) => {
-    setDetailFrom(view); // catet: dibuka dari "menu" atau "allmenu"
+    setDetailFrom(view);
     setSelectedMenu(menu);
     setView("detail");
   };
@@ -93,7 +92,7 @@ export default function App() {
     const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
     const tax = Math.round(subtotal * TAX_RATE);
     const service = Math.round(subtotal * SERVICE_RATE);
-    const total = Math.max(subtotal + tax + service - DISCOUNT, 0);
+    const total = Math.max(subtotal + tax + service, 0);
 
     // Perkiraan siap: sekarang + 15 s/d 20 menit
     const fmt = (d) =>
@@ -105,7 +104,7 @@ export default function App() {
       code: `PN-${Math.floor(1000 + Math.random() * 9000)}`,
       time: fmt(now) + " WIB",
       est,
-      items, note, payment, subtotal, tax, service, discount: DISCOUNT, total, status: 0,
+      items, note, payment, subtotal, tax, service, total, status: 0,
     });
     setCart([]);
     setView("pesanan");

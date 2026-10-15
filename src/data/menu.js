@@ -1,13 +1,12 @@
 export const categories = ["Semua", "Makanan", "Minuman", "Camilan"];
 
-// ===== Builder grup opsi =====
 const pedas = (harga = 2000) => ({
   id: "pedas",
-  title: "Level Pedas",
+  title: "Level pedas",
   options: [
-    { id: "tidak", label: "Tidak Pedas", note: "Ramah anak", priceDelta: 0 },
+    { id: "tidak", label: "Tidak pedas", note: "Ramah anak", priceDelta: 0 },
     { id: "sedang", label: "Sedang (Default)", tag: "Favorit", priceDelta: 0, default: true },
-    { id: "ekstra", label: "Ekstra Pedas", priceDelta: harga },
+    { id: "ekstra", label: "Pedas", priceDelta: harga },
   ],
 });
 
@@ -15,7 +14,7 @@ export const allMenus = [
   {
     id: 1,
     name: "Nasi Goreng Raja",
-    description: "Nasi goreng dengan ayam dan telur mata sapi. Porsi mantap, rasa rumahan yang bikin nagih.",
+    description: "Nasi goreng rempah dengan sate ayam bumbu kacang, telur mata sapi, dan kerupuk.",
     price: 42000,
     category: "Makanan",
     image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80",
@@ -25,17 +24,17 @@ export const allMenus = [
     featured: true,
     badge: "Tersedia minggu ini",
     detail: {
-      prepTime: "12 - 15 mnt",
-      portion: "1 Orang",
+      prepTime: "12 menit",
+      portion: "1 porsi",
       allergens: "Telur, Kacang",
       optionGroups: [
         pedas(2000),
         {
           id: "telur",
-          title: "Kematangan Telur",
+          title: "Telur",
           options: [
-            { id: "setengah", label: "Setengah Matang", tag: "Rekomendasi", priceDelta: 0, default: true },
-            { id: "matang", label: "Telur Ceplok Matang", note: "Matang sempurna", priceDelta: 0 },
+            { id: "setengah", label: "Setengah matang", tag: "Rekomendasi", priceDelta: 0, default: true },
+            { id: "matang", label: "Matang", note: "Matang sempurna", priceDelta: 0 },
           ],
         },
       ],
@@ -53,8 +52,8 @@ export const allMenus = [
     favorite: true,
     badge: "Best Seller",
     detail: {
-      prepTime: "10 - 12 mnt",
-      portion: "10 Tusuk",
+      prepTime: "10 menit",
+      portion: "10 tusuk",
       allergens: "Kacang, Kedelai",
       optionGroups: [
         pedas(2000),
@@ -62,9 +61,9 @@ export const allMenus = [
           id: "tambahan",
           title: "Tambahan",
           options: [
-            { id: "tanpa", label: "Tanpa Tambahan", priceDelta: 0, default: true },
-            { id: "nasi", label: "Extra Nasi Putih", priceDelta: 5000 },
-            { id: "lontong", label: "Extra Lontong", priceDelta: 5000 },
+            { id: "tanpa", label: "Tanpa tambahan", priceDelta: 0, default: true },
+            { id: "nasi", label: "Extra nasi putih", priceDelta: 5000 },
+            { id: "lontong", label: "Extra lontong", priceDelta: 5000 },
           ],
         },
       ],
@@ -82,18 +81,18 @@ export const allMenus = [
     favorite: true,
     badge: "Favorit",
     detail: {
-      prepTime: "15 - 20 mnt",
-      portion: "1 Orang",
+      prepTime: "15 menit",
+      portion: "1 porsi",
       allergens: "Kedelai, Terasi",
       optionGroups: [
         pedas(3000),
         {
           id: "nasi",
-          title: "Pilihan Nasi",
+          title: "Pilihan nasi",
           options: [
-            { id: "putih", label: "Nasi Putih", priceDelta: 0, default: true },
-            { id: "uduk", label: "Nasi Uduk", priceDelta: 3000 },
-            { id: "merah", label: "Nasi Merah", priceDelta: 4000 },
+            { id: "putih", label: "Nasi putih", priceDelta: 0, default: true },
+            { id: "uduk", label: "Nasi uduk", priceDelta: 3000 },
+            { id: "merah", label: "Nasi merah", priceDelta: 4000 },
           ],
         },
       ],
@@ -109,19 +108,19 @@ export const allMenus = [
     rating: 4.9,
     reviews: 402,
     favorite: true,
-    badge: "Paling Segar",
+    badge: "Paling segar",
     detail: {
-      prepTime: "3 - 5 mnt",
-      portion: "1 Gelas",
+      prepTime: "3 menit",
+      portion: "1 gelas",
       allergens: "Pandan",
       optionGroups: [
         {
           id: "manis",
-          title: "Tingkat Kemanisan",
+          title: "Tingkat kemanisan",
           options: [
             { id: "normal", label: "Manis (Default)", tag: "Favorit", priceDelta: 0, default: true },
-            { id: "less", label: "Sedikit Gula", priceDelta: 0 },
-            { id: "tanpa", label: "Tanpa Gula", priceDelta: 0 },
+            { id: "less", label: "Sedikit gula", priceDelta: 0 },
+            { id: "tanpa", label: "Tanpa gula", priceDelta: 0 },
           ],
         },
         {
@@ -137,7 +136,7 @@ export const allMenus = [
   },
   {
     id: 5,
-    name: "Pisang Keju",
+    name: "Pisang Goreng Keju",
     description: "Pisang goreng crispy dengan lelehan keju mozzarella dan susu kental manis.",
     price: 22000,
     category: "Camilan",
@@ -145,28 +144,28 @@ export const allMenus = [
     rating: 4.8,
     reviews: 156,
     favorite: true,
-    badge: "Camilan Manis",
+    badge: "Camilan manis",
     detail: {
-      prepTime: "8 - 10 mnt",
-      portion: "5 Potong",
+      prepTime: "8 menit",
+      portion: "5 potong",
       allergens: "Gluten, Susu",
       optionGroups: [
         {
           id: "topping",
           title: "Topping",
           options: [
-            { id: "keju", label: "Keju Melimpah", tag: "Rekomendasi", priceDelta: 0, default: true },
-            { id: "coklat", label: "Tambah Coklat", priceDelta: 2000 },
-            { id: "skm", label: "Tambah Susu Kental Manis", priceDelta: 1500 },
+            { id: "keju", label: "Keju melimpah", tag: "Rekomendasi", priceDelta: 0, default: true },
+            { id: "coklat", label: "Tambah coklat", priceDelta: 2000 },
+            { id: "skm", label: "Tambah susu kental manis", priceDelta: 1500 },
           ],
         },
         {
           id: "saus",
           title: "Saus",
           options: [
-            { id: "tanpa", label: "Tanpa Saus", priceDelta: 0, default: true },
-            { id: "mayo", label: "Saus Mayonaise", priceDelta: 2500 },
-            { id: "srikaya", label: "Saus Srikaya", priceDelta: 3000 },
+            { id: "tanpa", label: "Tanpa saus", priceDelta: 0, default: true },
+            { id: "mayo", label: "Saus mayonaise", priceDelta: 2500 },
+            { id: "srikaya", label: "Saus srikaya", priceDelta: 3000 },
           ],
         },
       ],
@@ -174,7 +173,7 @@ export const allMenus = [
   },
   {
     id: 6,
-    name: "Kopi Susu Gula Aren",
+    name: "Es Kopi Panegar",
     description: "Espresso robusta dengan susu segar dan gula aren asli. Creamy, nikmat, dan pas manisnya.",
     price: 18000,
     category: "Minuman",
@@ -184,17 +183,17 @@ export const allMenus = [
     favorite: true,
     badge: "Terlaris",
     detail: {
-      prepTime: "5 - 7 mnt",
-      portion: "1 Gelas",
+      prepTime: "5 menit",
+      portion: "1 gelas",
       allergens: "Susu, Kafein",
       optionGroups: [
         {
           id: "gula",
-          title: "Tingkat Kemanisan",
+          title: "Tingkat kemanisan",
           options: [
             { id: "normal", label: "Normal (Default)", tag: "Favorit", priceDelta: 0, default: true },
-            { id: "less", label: "Less Sugar", priceDelta: 0 },
-            { id: "tanpa", label: "Tanpa Gula", priceDelta: 0 },
+            { id: "less", label: "Less sugar", priceDelta: 0 },
+            { id: "tanpa", label: "Tanpa gula", priceDelta: 0 },
           ],
         },
         {
@@ -220,17 +219,17 @@ export const allMenus = [
     favorite: false,
     badge: "Baru!",
     detail: {
-      prepTime: "6 - 8 mnt",
-      portion: "2 Potong",
+      prepTime: "6 menit",
+      portion: "2 potong",
       allergens: "Gluten, Susu",
       optionGroups: [
         {
           id: "topping",
           title: "Topping",
           options: [
-            { id: "coklat", label: "Coklat Melimpah", tag: "Rekomendasi", priceDelta: 0, default: true },
-            { id: "keju", label: "Coklat + Keju", priceDelta: 3000 },
-            { id: "skm", label: "Tambah Susu Kental Manis", priceDelta: 1500 },
+            { id: "coklat", label: "Coklat melimpah", tag: "Rekomendasi", priceDelta: 0, default: true },
+            { id: "keju", label: "Coklat + keju", priceDelta: 3000 },
+            { id: "skm", label: "Tambah susu kental manis", priceDelta: 1500 },
           ],
         },
       ],
@@ -246,10 +245,10 @@ export const allMenus = [
     rating: 4.7,
     reviews: 143,
     favorite: false,
-    badge: "Kenyang Maksimal",
+    badge: "Kenyang maksimal",
     detail: {
-      prepTime: "10 - 12 mnt",
-      portion: "1 Porsi",
+      prepTime: "10 menit",
+      portion: "1 porsi",
       allergens: "Telur, Gluten, Kedelai",
       optionGroups: [
         pedas(2000),
@@ -257,9 +256,9 @@ export const allMenus = [
           id: "tambahan",
           title: "Tambahan",
           options: [
-            { id: "tanpa", label: "Tanpa Tambahan", priceDelta: 0, default: true },
-            { id: "telur", label: "Extra Telur", priceDelta: 4000 },
-            { id: "ayam", label: "Extra Ayam", priceDelta: 6000 },
+            { id: "tanpa", label: "Tanpa tambahan", priceDelta: 0, default: true },
+            { id: "telur", label: "Extra telur", priceDelta: 4000 },
+            { id: "ayam", label: "Extra ayam", priceDelta: 6000 },
           ],
         },
       ],
@@ -270,7 +269,6 @@ export const allMenus = [
 export const featuredMenu = allMenus.find((m) => m.featured);
 export const favoriteMenus = allMenus.filter((m) => m.favorite);
 
-// ===== Helper opsi (sama seperti sebelumnya) =====
 export function getDefaultChoices(menu) {
   const sel = {};
   menu.detail?.optionGroups?.forEach((g) => {

@@ -40,7 +40,7 @@ export default function OrderStatusPage({
   if (!order) {
     return (
       <div className="min-h-screen bg-[var(--cream)]">
-        <div className="mx-auto flex min-h-screen max-w-md flex-col bg-[var(--cream)] pb-24">
+        <div className="mx-auto flex min-h-screen max-w-md flex-col pb-24 md:max-w-none">
           <div className="flex flex-1 flex-col items-center justify-center gap-2 px-8 text-center">
             <span className="text-6xl">🧾</span>
             <p className="text-lg font-extrabold text-[#3f2a16]">Belum ada pesanan</p>
@@ -66,9 +66,9 @@ export default function OrderStatusPage({
 
   return (
     <div className="min-h-screen bg-[var(--cream)]">
-      <div className="mx-auto min-h-screen max-w-md pb-36">
+      <div className="mx-auto min-h-screen max-w-md pb-36 md:max-w-none">
         {/* Header */}
-        <header className="flex items-center justify-between px-4 pt-4">
+        <header className="flex items-center justify-between px-4 pt-4 md:px-6">
           <button
             onClick={onGoToMenu}
             className="flex h-9 w-9 items-center justify-center rounded-full border border-[#eadfcd] bg-white text-[#3f2a16] transition active:scale-90"
@@ -82,7 +82,7 @@ export default function OrderStatusPage({
         </header>
 
         {/* Hero card */}
-        <section className="mt-4 px-4">
+        <section className="mt-4 px-4 md:px-6">
           <div className="rounded-3xl bg-gradient-to-br from-[var(--brand-dark)] to-[#5c3a1c] p-5 text-white shadow-md">
             <div className="flex items-start gap-3.5">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#f5c26b] text-[#3f2a16]">
@@ -110,11 +110,10 @@ export default function OrderStatusPage({
         </section>
 
         {/* Progres pesanan */}
-        <section className="mt-5 px-4">
+        <section className="mt-5 px-4 md:px-6">
           <h3 className="text-base font-extrabold text-[#3f2a16]">Progres pesanan</h3>
           <div className="mt-3 rounded-3xl bg-white p-4 shadow-sm">
             <div className="relative">
-              {/* garis vertikal */}
               <span className="absolute bottom-4 left-[15px] top-4 w-0.5 bg-[#f3ead9]" />
 
               {STEPS.map((step, i) => {
@@ -122,7 +121,6 @@ export default function OrderStatusPage({
                 const isActive = i === currentStep && !done;
                 return (
                   <div key={step.title} className="relative flex gap-3.5 pb-5 last:pb-0">
-                    {/* bullet */}
                     {isDone ? (
                       <span className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--brand)] text-white">
                         <CheckIcon className="h-4 w-4" />
@@ -139,7 +137,11 @@ export default function OrderStatusPage({
 
                     <div className="min-w-0 flex-1 pt-1">
                       <div className="flex items-center justify-between gap-2">
-                        <p className={`text-sm font-bold ${isDone || isActive ? "text-[#3f2a16]" : "text-[#bda98d]"}`}>
+                        <p
+                          className={`text-sm font-bold ${
+                            isDone || isActive ? "text-[#3f2a16]" : "text-[#bda98d]"
+                          }`}
+                        >
                           {step.title}
                         </p>
                         {isActive && (
@@ -148,7 +150,11 @@ export default function OrderStatusPage({
                           </span>
                         )}
                       </div>
-                      <p className={`mt-0.5 text-[11px] ${isActive || isDone ? "text-[#a08a70]" : "text-[#c9b99f]"}`}>
+                      <p
+                        className={`mt-0.5 text-[11px] ${
+                          isActive || isDone ? "text-[#a08a70]" : "text-[#c9b99f]"
+                        }`}
+                      >
                         {step.title === "Diantar ke meja"
                           ? `${step.desc} Meja ${tableNumber}`
                           : i === 0 && isDone
@@ -164,7 +170,7 @@ export default function OrderStatusPage({
         </section>
 
         {/* Rincian pesanan */}
-        <section className="mt-5 px-4">
+        <section className="mt-5 px-4 md:px-6">
           <div className="rounded-3xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-extrabold text-[#3f2a16]">Rincian pesanan</h3>
@@ -211,7 +217,7 @@ export default function OrderStatusPage({
         </section>
 
         {/* Aksi */}
-        <section className="mt-5 space-y-2.5 px-4">
+        <section className="mt-5 space-y-2.5 px-4 md:px-6">
           <button
             onClick={onAddMore}
             className="w-full rounded-full bg-[var(--brand)] py-3.5 text-sm font-bold text-white shadow-lg shadow-black/15 transition active:scale-[0.98]"
@@ -241,7 +247,8 @@ export default function OrderStatusPage({
             <span className="text-4xl">🔔</span>
             <p className="mt-2 text-base font-extrabold text-[#3f2a16]">Pelayan dipanggil!</p>
             <p className="mt-1 text-xs leading-relaxed text-[#8a7460]">
-              Tenang, pelayan akan segera menuju <b>Meja {tableNumber}</b>. Ditunggu di tempat yaa 😊
+              Tenang, pelayan akan segera menuju <b>Meja {tableNumber}</b>. Ditunggu di
+              tempat yaa 😊
             </p>
             <button
               onClick={() => setShowWaiter(false)}

@@ -26,10 +26,10 @@ export default function MenuPage({
 
   return (
     <div className="min-h-screen bg-[var(--cream)]">
-      <div className="mx-auto min-h-screen max-w-md pb-44">
+      <div className="mx-auto min-h-screen max-w-md pb-44 md:max-w-none">
         <HomeHeader tableNumber={tableNumber} />
 
-        <section className="px-4 pt-5">
+        <section className="px-4 pt-5 md:px-6">
           <p className="text-[11px] font-medium text-[#8a7460]">
             Pesanan langsung dari meja, tanpa antre
           </p>
@@ -45,7 +45,7 @@ export default function MenuPage({
           <FeaturedCard menu={featuredMenu} onOpen={onOpenDetail} onAdd={addToCart} />
         )}
 
-        <section className="mt-6 flex items-center justify-between px-4">
+        <section className="mt-6 flex items-center justify-between px-4 md:px-6">
           <h3 className="text-base font-extrabold text-[#3f2a16]">Menu favorit</h3>
           <button
             onClick={onSeeAll}

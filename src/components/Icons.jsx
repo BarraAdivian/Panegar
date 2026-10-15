@@ -37,13 +37,6 @@ export const ReceiptIcon = (props) => (
   </svg>
 );
 
-export const UserIcon = (props) => (
-  <svg {...base} {...props}>
-    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-    <circle cx="12" cy="7" r="4" />
-  </svg>
-);
-
 export const ArrowLeftIcon = (props) => (
   <svg {...base} {...props}>
     <path d="m12 19-7-7 7-7" />
@@ -54,14 +47,6 @@ export const ArrowLeftIcon = (props) => (
 export const CheckIcon = (props) => (
   <svg {...base} {...props}>
     <path d="M20 6 9 17l-5-5" />
-  </svg>
-);
-
-export const TrashIcon = (props) => (
-  <svg {...base} {...props}>
-    <path d="M3 6h18" />
-    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
   </svg>
 );
 
@@ -82,14 +67,6 @@ export const ClockIcon = (props) => (
   <svg {...base} {...props}>
     <circle cx="12" cy="12" r="9" />
     <path d="M12 7v5l3 2" />
-  </svg>
-);
-
-export const WarningIcon = (props) => (
-  <svg {...base} {...props}>
-    <path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z" />
-    <path d="M12 9v4" />
-    <path d="M12 17h.01" />
   </svg>
 );
 

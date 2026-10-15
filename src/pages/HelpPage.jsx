@@ -24,7 +24,7 @@ const FAQS = [
 
 export default function HelpPage({ tableNumber, navActive, onNavChange }) {
   const [openFaq, setOpenFaq] = useState(0);
-  const [modal, setModal] = useState(null); // waiter | tagihan | alat | wifi | lainnya
+  const [modal, setModal] = useState(null);
   const [reqText, setReqText] = useState("");
   const [reqSent, setReqSent] = useState(false);
 
@@ -43,9 +43,9 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
 
   return (
     <div className="min-h-screen bg-[var(--cream)]">
-      <div className="mx-auto min-h-screen max-w-md pb-28">
+      <div className="mx-auto min-h-screen max-w-md pb-28 md:max-w-none">
         {/* Header */}
-        <header className="flex items-center justify-between px-4 pt-4">
+        <header className="flex items-center justify-between px-4 pt-4 md:px-6">
           <h1 className="text-base font-extrabold text-[#3f2a16]">Bantuan</h1>
           <span className="rounded-full bg-[var(--brand-dark)] px-3.5 py-1.5 text-[11px] font-bold text-white">
             Meja {tableNumber}
@@ -53,7 +53,7 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
         </header>
 
         {/* Hero */}
-        <section className="mt-4 px-4">
+        <section className="mt-4 px-4 md:px-6">
           <div className="rounded-3xl bg-gradient-to-br from-[var(--brand-dark)] to-[#5c3a1c] p-5 shadow-md">
             <div className="flex items-center gap-3.5">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/10">
@@ -77,9 +77,9 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
         </section>
 
         {/* Permintaan cepat */}
-        <section className="mt-6 px-4">
+        <section className="mt-6 px-4 md:px-6">
           <h3 className="text-base font-extrabold text-[#3f2a16]">Permintaan cepat</h3>
-          <div className="mt-3 grid grid-cols-2 gap-3">
+          <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
             {quickRequests.map(({ id, icon: Icon, title, desc }) => (
               <button
                 key={id}
@@ -97,16 +97,13 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
         </section>
 
         {/* Pertanyaan umum */}
-        <section className="mt-6 px-4">
+        <section className="mt-6 px-4 md:px-6">
           <h3 className="text-base font-extrabold text-[#3f2a16]">Pertanyaan umum</h3>
           <div className="mt-3 rounded-3xl bg-white px-4 shadow-sm">
             {FAQS.map((faq, i) => {
               const open = openFaq === i;
               return (
-                <div
-                  key={faq.q}
-                  className={i !== 0 ? "border-t border-[#f3ead9]" : ""}
-                >
+                <div key={faq.q} className={i !== 0 ? "border-t border-[#f3ead9]" : ""}>
                   <button
                     onClick={() => setOpenFaq(open ? null : i)}
                     className="flex w-full items-center justify-between gap-3 py-4 text-left"
@@ -119,9 +116,7 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
                     />
                   </button>
                   {open && (
-                    <p className="-mt-1 pb-4 text-xs leading-relaxed text-[#8a7460]">
-                      {faq.a}
-                    </p>
+                    <p className="-mt-1 pb-4 text-xs leading-relaxed text-[#8a7460]">{faq.a}</p>
                   )}
                 </div>
               );
@@ -140,13 +135,10 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
             className="w-full max-w-xs rounded-3xl bg-white p-6 text-center shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Panggil pelayan */}
             {modal === "waiter" && (
               <>
                 <span className="text-4xl">🔔</span>
-                <p className="mt-2 text-base font-extrabold text-[#3f2a16]">
-                  Pelayan dipanggil!
-                </p>
+                <p className="mt-2 text-base font-extrabold text-[#3f2a16]">Pelayan dipanggil!</p>
                 <p className="mt-1 text-xs leading-relaxed text-[#8a7460]">
                   Tenang, pelayan akan segera menuju <b>Meja {tableNumber}</b>. Ditunggu di
                   tempat yaa 😊
@@ -154,7 +146,6 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
               </>
             )}
 
-            {/* Minta tagihan */}
             {modal === "tagihan" && (
               <>
                 <span className="text-4xl">🧾</span>
@@ -162,27 +153,22 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
                   Tagihan sedang disiapkan
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-[#8a7460]">
-                  Pelayan akan membawa tagihan ke <b>Meja {tableNumber}</b>. Pembayaran
-                  bisa tunai, debit, atau QRIS.
+                  Pelayan akan membawa tagihan ke <b>Meja {tableNumber}</b>. Pembayaran bisa
+                  tunai, debit, atau QRIS.
                 </p>
               </>
             )}
 
-            {/* Alat makan */}
             {modal === "alat" && (
               <>
                 <span className="text-4xl">🍴</span>
-                <p className="mt-2 text-base font-extrabold text-[#3f2a16]">
-                  Alat makan dipesan!
-                </p>
+                <p className="mt-2 text-base font-extrabold text-[#3f2a16]">Alat makan dipesan!</p>
                 <p className="mt-1 text-xs leading-relaxed text-[#8a7460]">
-                  Sendok, garpu, dan tisu akan segera diantar ke{" "}
-                  <b>Meja {tableNumber}</b>.
+                  Sendok, garpu, dan tisu akan segera diantar ke <b>Meja {tableNumber}</b>.
                 </p>
               </>
             )}
 
-            {/* Info Wi-Fi */}
             {modal === "wifi" && (
               <>
                 <span className="text-4xl">📶</span>
@@ -193,22 +179,17 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
                     <p className="text-sm font-bold text-[#3f2a16]">{WIFI.name}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase text-[#a08a70]">
-                      Kata sandi
-                    </p>
+                    <p className="text-[10px] font-bold uppercase text-[#a08a70]">Kata sandi</p>
                     <p className="text-sm font-bold text-[#3f2a16]">{WIFI.password}</p>
                   </div>
                 </div>
               </>
             )}
 
-            {/* Lainnya — tulis permintaan */}
             {modal === "lainnya" && (
               <>
                 <span className="text-4xl">💬</span>
-                <p className="mt-2 text-base font-extrabold text-[#3f2a16]">
-                  Tulis permintaan
-                </p>
+                <p className="mt-2 text-base font-extrabold text-[#3f2a16]">Tulis permintaan</p>
                 {reqSent ? (
                   <p className="mt-2 text-xs leading-relaxed text-[#8a7460]">
                     Permintaan kamu terkirim! Pelayan akan segera menuju{" "}
@@ -220,7 +201,7 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
                       rows={3}
                       value={reqText}
                       onChange={(e) => setReqText(e.target.value)}
-                      placeholder="Contoh: minta piring kecil, airs gelas..."
+                      placeholder="Contoh: minta piring kecil, air gelas..."
                       className="mt-3 w-full resize-none rounded-2xl border border-[#eadfcd] bg-[var(--brand-soft)] p-3 text-sm outline-none placeholder:text-[#bda98d] focus:border-[var(--brand)]"
                     />
                     <button
@@ -235,7 +216,6 @@ export default function HelpPage({ tableNumber, navActive, onNavChange }) {
               </>
             )}
 
-            {/* Tombol tutup (selain form lainnya) */}
             {modal !== "lainnya" && (
               <button
                 onClick={closeModal}

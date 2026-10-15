@@ -2,7 +2,7 @@ import { rupiah } from "../utils/format";
 
 export default function FeaturedCard({ menu, onOpen, onAdd }) {
   return (
-    <section className="mt-4 px-4">
+    <section className="mt-4 px-4 md:px-6">
       <div
         onClick={() => onOpen(menu)}
         className="relative cursor-pointer overflow-hidden rounded-3xl shadow-md transition active:scale-[0.99]"
@@ -24,7 +24,7 @@ export default function FeaturedCard({ menu, onOpen, onAdd }) {
                 e.stopPropagation();
                 onAdd(menu);
               }}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-xl leading-none font-bold text-[var(--brand)] shadow-md transition active:scale-90"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-xl font-bold leading-none text-[var(--brand)] shadow-md transition active:scale-90"
             >
               +
             </button>

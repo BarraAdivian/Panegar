@@ -2,7 +2,7 @@ import { categories } from "../data/menu";
 
 export default function CategoryTabs({ active, onChange }) {
   return (
-    <div className="no-scrollbar mt-4 flex gap-2 overflow-x-auto px-4">
+    <div className="no-scrollbar mt-4 flex gap-2 overflow-x-auto px-4 md:px-6">
       {categories.map((cat) => (
         <button
           key={cat}
