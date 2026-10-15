@@ -23,19 +23,19 @@ export default function AllMenuPage({
   return (
     <div className="min-h-screen bg-[var(--cream)]">
       <div className="mx-auto min-h-screen max-w-md pb-44 md:max-w-none">
-        <div className="flex items-center justify-between px-4 pt-4 md:px-6">
+        {/* Header: back circle + judul tengah + meja */}
+        <header className="flex items-center justify-between px-4 pt-4 md:px-6">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 rounded-full border border-[#eadfcd] bg-white py-2 pl-3 pr-4 text-[#3f2a16] transition active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#eadfcd] bg-white text-[#3f2a16] transition active:scale-90"
           >
-            <ArrowLeftIcon className="h-4 w-4" />
-            <span className="text-sm font-bold">Kembali</span>
+            <ArrowLeftIcon className="h-5 w-5" />
           </button>
-
+          <h1 className="text-base font-extrabold text-[#3f2a16]">Semua menu</h1>
           <span className="rounded-full bg-[var(--brand-dark)] px-3.5 py-1.5 text-[11px] font-bold text-white">
             Meja {tableNumber}
           </span>
-        </div>
+        </header>
 
         <SearchBar value={search} onChange={setSearch} />
         <CategoryTabs active={category} onChange={setCategory} />

@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ClockIcon } from "../components/Icons";
+import { ClockIcon } from "../components/Icons";
 import { rupiah } from "../utils/format";
 
 const TAX_RATE = 0.1;      // Pajak PB1 10%
@@ -25,7 +25,7 @@ export default function CartPage({
     return (
       <div className="min-h-screen bg-[var(--cream)]">
         <div className="mx-auto min-h-screen max-w-md md:max-w-none">
-          <Header tableNumber={tableNumber} onBack={onBack} />
+          <Header tableNumber={tableNumber} />
           <div className="flex h-[70vh] flex-col items-center justify-center gap-2 text-center">
             <span className="text-5xl">🛒</span>
             <p className="font-extrabold text-[#3f2a16]">Belum ada pesanan</p>
@@ -45,7 +45,7 @@ export default function CartPage({
   return (
     <div className="min-h-screen bg-[var(--cream)]">
       <div className="mx-auto min-h-screen max-w-md pb-36 md:max-w-none">
-        <Header tableNumber={tableNumber} onBack={onBack} />
+        <Header tableNumber={tableNumber} />
 
         {/* Judul + tambah menu */}
         <section className="mt-4 flex items-center justify-between px-4 md:px-6">
@@ -189,15 +189,9 @@ export default function CartPage({
   );
 }
 
-function Header({ tableNumber, onBack }) {
+function Header({ tableNumber }) {
   return (
     <header className="flex items-center justify-between px-4 pt-4 md:px-6">
-      <button
-        onClick={onBack}
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-[#eadfcd] bg-white text-[#3f2a16] transition active:scale-90"
-      >
-        <ArrowLeftIcon className="h-5 w-5" />
-      </button>
       <h1 className="text-base font-extrabold text-[#3f2a16]">Pesanan kamu</h1>
       <span className="rounded-full bg-[var(--brand-dark)] px-3.5 py-1.5 text-[11px] font-bold text-white">
         Meja {tableNumber}

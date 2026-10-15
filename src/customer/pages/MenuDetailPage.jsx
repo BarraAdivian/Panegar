@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeftIcon, ClockIcon, BagIcon } from "../components/Icons";
+import { ArrowLeftIcon, BagIcon } from "../components/Icons";
 import { getDefaultChoices, getUnitPrice } from "../data/menu";
 import { rupiah } from "../utils/format";
 
@@ -14,6 +14,7 @@ export default function MenuDetailPage({ menu, tableNumber, onBack, onAdd }) {
   return (
     <div className="min-h-screen bg-[var(--cream)]">
       <div className="mx-auto min-h-screen max-w-md pb-32 md:max-w-none">
+        {/* Header */}
         <header className="sticky top-0 z-40 flex items-center justify-between bg-[var(--cream)]/95 px-4 py-3 backdrop-blur md:px-6">
           <button
             onClick={onBack}
@@ -27,6 +28,7 @@ export default function MenuDetailPage({ menu, tableNumber, onBack, onAdd }) {
           </span>
         </header>
 
+        {/* Foto */}
         <section className="px-4 md:px-6">
           <img
             src={menu.image}
@@ -35,30 +37,22 @@ export default function MenuDetailPage({ menu, tableNumber, onBack, onAdd }) {
           />
         </section>
 
-        <section className="mt-3 px-4 md:px-6">
-          <span className="inline-flex items-center gap-1 rounded-full bg-[#fff3e0] px-3 py-1.5 text-[11px] font-bold text-[#7a4e28]">
-            🔥 {menu.badge}
-          </span>
-        </section>
-
-        <section className="mt-2 flex items-start justify-between gap-3 px-4 md:px-6">
-          <h2 className="text-xl font-extrabold leading-snug text-[#3f2a16]">{menu.name}</h2>
+        {/* Nama + harga */}
+        <section className="mt-4 flex items-start justify-between gap-3 px-4 md:px-6">
+          <h2 className="text-xl font-extrabold leading-snug text-[#3f2a16]">
+            {menu.name}
+          </h2>
           <span className="shrink-0 text-xl font-extrabold text-[var(--brand)]">
             {rupiah(menu.price)}
           </span>
         </section>
 
+        {/* Deskripsi */}
         <p className="mt-1.5 px-4 text-sm leading-relaxed text-[#8a7460] md:px-6">
           {menu.description}
         </p>
 
-        <div className="mt-2.5 flex items-center gap-1.5 px-4 text-xs text-[#8a7460] md:px-6">
-          <ClockIcon className="h-3.5 w-3.5" />
-          <span>
-            {menu.detail.prepTime} • {menu.detail.portion} • Halal
-          </span>
-        </div>
-
+        {/* Grup opsi */}
         {menu.detail.optionGroups.map((g) => (
           <section key={g.id} className="mt-5 px-4 md:px-6">
             <div className="flex items-center justify-between">
@@ -95,6 +89,7 @@ export default function MenuDetailPage({ menu, tableNumber, onBack, onAdd }) {
           </section>
         ))}
 
+        {/* Catatan */}
         <section className="mt-6 px-4 md:px-6">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-bold text-[#3f2a16]">Catatan</h3>
@@ -110,6 +105,7 @@ export default function MenuDetailPage({ menu, tableNumber, onBack, onAdd }) {
         </section>
       </div>
 
+      {/* Bar bawah */}
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#efe5d6] bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-md items-center gap-4 p-4 md:max-w-2xl">
           <div className="flex items-center gap-3">
@@ -123,7 +119,9 @@ export default function MenuDetailPage({ menu, tableNumber, onBack, onAdd }) {
             >
               −
             </button>
-            <span className="w-4 text-center text-sm font-extrabold text-[#3f2a16]">{qty}</span>
+            <span className="w-4 text-center text-sm font-extrabold text-[#3f2a16]">
+              {qty}
+            </span>
             <button
               onClick={() => setQty((q) => q + 1)}
               className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--brand)] text-lg font-bold text-white shadow transition active:scale-90"
