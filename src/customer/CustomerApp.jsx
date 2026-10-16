@@ -6,15 +6,25 @@ import OrderStatusPage from "./pages/OrderStatusPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import MenuDetailPage from "./pages/MenuDetailPage";
 import HelpPage from "./pages/HelpPage";
+import { tableTokens } from "./data/token";
 import {
-  allMenus, getDefaultChoices, getUnitPrice, getOptionLabels,
+  allMenus,
+  getDefaultChoices,
+  getUnitPrice,
+  getOptionLabels,
 } from "./data/menu";
 
-const TAX_RATE = 0.1;      // Pajak PB1 10%
+const TAX_RATE = 0.1; // Pajak PB1 10%
 const SERVICE_RATE = 0.05; // Biaya layanan 5%
 
 export default function CustomerApp() {
-  const tableNumber = new URLSearchParams(window.location.search).get("meja") ?? "04";
+  const params = new URLSearchParams(window.location.search);
+
+  const tableNumber = params.get("meja");
+  const tableToken = params.get("token");
+
+  const isValidTable =
+    tableNumber !== null && tableTokens[tableNumber] === tableToken;
 
   const [view, setView] = useState("menu"); // menu | allmenu | detail | cart | sukses | pesanan | bantuan
   const [selectedMenu, setSelectedMenu] = useState(null);
@@ -33,15 +43,32 @@ export default function CustomerApp() {
 
   const pushItem = (menu, choices, qty, itemNote) => {
     const labels = getOptionLabels(menu, choices);
-    const key = `${menu.id}|${Object.keys(choices).sort().map((k) => choices[k]).join("-")}`;
+    const key = `${menu.id}|${Object.keys(choices)
+      .sort()
+      .map((k) => choices[k])
+      .join("-")}`;
     const price = getUnitPrice(menu, choices);
 
     setCart((prev) => {
       const exists = prev.find((i) => i.key === key);
       if (exists) {
-        return prev.map((i) => (i.key === key ? { ...i, qty: i.qty + qty } : i));
+        return prev.map((i) =>
+          i.key === key ? { ...i, qty: i.qty + qty } : i,
+        );
       }
-      return [...prev, { key, id: menu.id, name: menu.name, image: menu.image, price, qty, note: itemNote, options: labels }];
+      return [
+        ...prev,
+        {
+          key,
+          id: menu.id,
+          name: menu.name,
+          image: menu.image,
+          price,
+          qty,
+          note: itemNote,
+          options: labels,
+        },
+      ];
     });
   };
 
@@ -61,11 +88,14 @@ export default function CustomerApp() {
   const updateQty = (key, delta) =>
     setCart((prev) =>
       prev
-        .map((item) => (item.key === key ? { ...item, qty: item.qty + delta } : item))
-        .filter((item) => item.qty > 0)
+        .map((item) =>
+          item.key === key ? { ...item, qty: item.qty + delta } : item,
+        )
+        .filter((item) => item.qty > 0),
     );
 
-  const removeItem = (key) => setCart((prev) => prev.filter((item) => item.key !== key));
+  const removeItem = (key) =>
+    setCart((prev) => prev.filter((item) => item.key !== key));
 
   // 🧾 Buat order dari isi keranjang (simulasi lokal, tanpa database)
   const createOrder = ({ items, note, payment }) => {
@@ -84,11 +114,33 @@ export default function CustomerApp() {
       code: `PN-${Math.floor(1000 + Math.random() * 9000)}`,
       time: fmt(now) + " WIB",
       est,
-      items, note, payment, subtotal, tax, service, total, status: 0,
+      items,
+      note,
+      payment,
+      subtotal,
+      tax,
+      service,
+      total,
+      status: 0,
     });
     setCart([]);
     setView("sukses"); // ← lewat halaman sukses dulu
   };
+
+  if (!isValidTable) {
+    return (
+      <main className="flex min-h-screen items-center justify-center p-6">
+        <div className="max-w-sm text-center">
+          <h1 className="text-xl font-bold">Link meja tidak valid</h1>
+
+          <p className="mt-2 text-sm text-gray-500">
+            Silakan scan QR Code yang tersedia di meja untuk membuka menu
+            restoran.
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   // ===== Routing =====
 
