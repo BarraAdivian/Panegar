@@ -3,6 +3,8 @@ import BottomNav from "./components/BottomNav";
 import Sidebar from "./components/Sidebar";
 import OrderCard from "./components/OrderCard";
 import Logo from "./components/Logo";
+import AdminMenuPage from "./pages/AdminMenuPage";
+import AdminLaporanPage from "./pages/AdminLaporanPage";
 import { BellIcon, UtensilsIcon, ChartIcon, UserIcon } from "./components/Icons";
 import { initialOrders, orderTotal, orderCount, STATUS } from "./data/orders";
 import { rupiah } from "./utils/format";
@@ -66,8 +68,6 @@ export default function AdminApp() {
   });
 
   const placeholders = {
-    menu: { icon: UtensilsIcon, title: "Kelola Menu", desc: "Atur menu & ketersediaan" },
-    laporan: { icon: ChartIcon, title: "Laporan", desc: "Penjualan & statistik harian" },
     akun: { icon: UserIcon, title: "Akun", desc: "Profil & pengaturan admin" },
   };
 
@@ -188,6 +188,10 @@ export default function AdminApp() {
                 ))}
               </div>
             </main>
+          ) : tab === "menu" ? (
+            <AdminMenuPage />
+          ) : tab === "laporan" ? (
+            <AdminLaporanPage orders={orders} />
           ) : (
             <main className="flex h-[70vh] flex-col items-center justify-center gap-2 px-8 text-center">
               {(() => {
@@ -222,7 +226,7 @@ export default function AdminApp() {
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-base font-extrabold text-[#3f2a16]">#{detail.id}</p>
+                <p className="text-base font-extrabold text-[#3f2a16]">#{detail.code}</p>
                 <p className="mt-0.5 text-[11px] text-[#a08a70]">
                   Meja {detail.table} •{" "}
                   {detail.createdAt.toLocaleTimeString("id-ID", {
