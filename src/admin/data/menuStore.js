@@ -28,7 +28,7 @@ function emit() {
   listeners.forEach((l) => l(menus));
 }
 
-// Sinkron antar-tab (admin kebuka di 2 tab tetap nyambung)
+// Sinkron antar-tab
 window.addEventListener("storage", (e) => {
   if (e.key === KEY) {
     menus = load();
@@ -43,16 +43,19 @@ export function useMenus() {
   useEffect(() => {
     const listener = (m) => setSnapshot(m);
     listeners.add(listener);
-    setSnapshot(menus); // sinkron kalau ada perubahan sebelum ikut daftar
+    setSnapshot(menus);
     return () => listeners.delete(listener);
   }, []);
 
   return snapshot;
 }
 
-// ✍️ CRUD — setiap selesai, panggil emit() biar tampilan langsung update
+// ✍️ CRUD — setiap selesai, emit() biar tampilan langsung update
 export function addMenu(menu) {
-  let next = [{ ...menu, id: Date.now() }, ...menus];
+  let next = [
+    { ...menu, id: Date.now(), available: menu.available !== false },
+    ...menus,
+  ];
   if (menu.featured) {
     next = next.map((m) => (m.id === next[0].id ? m : { ...m, featured: false }));
   }

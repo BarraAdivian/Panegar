@@ -6,7 +6,7 @@ export const initialOrders = [
     id: "PSN-1042",
     table: "04",
     status: 0,
-    payment: "kasir",
+    payment: "qris",
     createdAt: mnt(2),
     items: [
       { name: "Nasi Goreng Raja", note: "Pedas sedang, telur mata sapi", qty: 2, price: 42000 },

@@ -1,10 +1,10 @@
-import { ListIcon, UtensilsIcon, ChartIcon, UserIcon } from "./Icons";
+import { UtensilsIcon, ListIcon, ChartIcon, UserIcon } from "./Icons";
 
 const TABS = [
   { id: "pesanan", label: "Pesanan", icon: ListIcon },
   { id: "menu", label: "Menu", icon: UtensilsIcon },
   { id: "laporan", label: "Laporan", icon: ChartIcon },
-  { id: "akun", label: "Akun", icon: UserIcon },
+  { id: "Akun", label: "Akun", icon: UserIcon },
 ];
 
 export default function BottomNav({ active, onChange }) {
